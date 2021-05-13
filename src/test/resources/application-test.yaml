@@ -1,0 +1,33 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /v1/prueba-service
+
+spring:
+  application:
+    name: prueba-service
+
+  datasource:
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+    hikari:
+      connection-test-query: SELECT 1
+      minimum-idle: 1
+      maximum-pool-size: 12000
+
+    initialization-mode: always
+    data: classpath:cliente/cliente.sql,classpath:producto/producto.sql,classpath:reclamo/reclamo.sql
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+      hibernate:
+        naming:
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
